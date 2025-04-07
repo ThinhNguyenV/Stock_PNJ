@@ -1,0 +1,48 @@
+# PNJ Stock Prediction Model Evaluation
+
+## Model Performance Comparison
+
+1. Linear Regression Model:
+   - RMSE: 1.2807
+   - MAE: 0.9732
+   - R²: 0.9594
+   - Mean Error: 0.0676
+   - Median Error: 0.0292
+   - Std Dev of Error: 1.3337
+   - Mean Percentage Error: 0.0554%
+
+2. Random Forest Model:
+   - RMSE: 2.4175
+   - MAE: 1.8945
+   - R²: 0.8554
+
+3. Gradient Boosting Model:
+   - RMSE: 2.2263
+   - MAE: 1.7110
+   - R²: 0.8773
+
+4. XGBoost Model:
+   - RMSE: 2.2381
+   - MAE: 1.7696
+   - R²: 0.8760
+
+5. ARIMA Model:
+   - RMSE: 6.2965
+   - MAE: 4.7370
+   - R²: -0.0274
+
+## Key Findings
+
+1. The Linear Regression model significantly outperforms all other models with the lowest RMSE (1.28) and highest R² (0.96).
+2. The tree-based models (Random Forest, Gradient Boosting, XGBoost) perform similarly to each other but not as well as Linear Regression.
+3. The ARIMA model performs poorly with a negative R² value, indicating it performs worse than a simple mean-based prediction.
+4. The Linear Regression model's errors are relatively small and normally distributed around zero, suggesting unbiased predictions.
+5. The mean percentage error for the Linear Regression model is relatively low, indicating good prediction accuracy.
+
+## Recommendations
+
+1. Use the Linear Regression model for making predictions of PNJ stock prices.
+2. Consider ensemble methods that combine Linear Regression with other models to potentially improve performance further.
+3. For future work, explore deep learning models like LSTM which may capture more complex patterns in the time series data.
+4. Regularly retrain the model with new data to maintain prediction accuracy as market conditions change.
+5. Consider incorporating external factors like market indices, economic indicators, or news sentiment for potentially improved predictions.

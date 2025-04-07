@@ -1,9 +1,9 @@
 Metric,Value
 Last Close Price,76.7
-Predicted Price (Next Day),76.43136654607497
-Predicted Price (30 Days),75.59873802290181
-Expected Change (30 Days),-1.10126197709819
-Expected Change % (30 Days),-1.4358044029963324
+Predicted Price (Next Day),76.43136654607495
+Predicted Price (30 Days),75.5987380229018
+Expected Change (30 Days),-1.1012619770982042
+Expected Change % (30 Days),-1.4358044029963546
 Buy Signals,0.0
 Sell Signals,0.0
 Hold Signals,30.0

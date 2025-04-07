@@ -212,6 +212,6 @@ plt.savefig('stock_analysis/technical_indicators/correlation_heatmap.png', dpi=3
 plt.close()
 
 # Save correlation to file
-correlation.to_frame().to_csv('technical_indicators/indicator_correlation.csv')
+correlation.to_frame().to_csv('stock_analysis/technical_indicators/indicator_correlation.csv')
 
 print("Technical indicator analysis completed. Results saved to stock_analysis/technical_indicators/")

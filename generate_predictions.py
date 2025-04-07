@@ -17,7 +17,7 @@ sns.set(style="darkgrid")
 os.makedirs('stock_analysis/predictions', exist_ok=True)
 
 # Load the data with technical indicators
-print("Loading data with technical indicators...")
+print("Loading data with technical indicators")
 df = pd.read_csv('stock_analysis/data/pnj_daily_with_indicators.csv')
 df['Date/Time'] = pd.to_datetime(df['Date/Time'])
 df.set_index('Date/Time', inplace=True)
@@ -26,7 +26,7 @@ df.set_index('Date/Time', inplace=True)
 df_clean = df.dropna()
 
 # Feature Engineering (same as in build_model.py)
-print("\nPerforming feature engineering...")
+print("\nPerforming feature engineering")
 # Create lag features
 for i in range(1, 6):
     df_clean[f'Close_Lag_{i}'] = df_clean['Close'].shift(i)
@@ -65,18 +65,18 @@ y_next_week = df_clean['Target_Next_Week']
 y_next_month = df_clean['Target_Next_Month']
 
 # Scale the features
-print("Scaling features...")
+print("Scaling features")
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Train the Linear Regression model on the full dataset
-print("\nTraining Linear Regression model on full dataset...")
+print("\nTraining Linear Regression model on full dataset")
 lr_model = LinearRegression()
 lr_model.fit(X_scaled, y_next_day)
 
 # Function to generate predictions for future dates
 def generate_future_predictions(model, last_data, num_days=30):
-    print(f"\nGenerating predictions for next {num_days} days...")
+    print(f"\nGenerating predictions for next {num_days} days")
     
     # Create a dataframe to store predictions
     future_dates = [last_data.index[-1] + timedelta(days=i+1) for i in range(num_days)]
@@ -144,7 +144,7 @@ print("\nPredictions for the next 30 days:")
 print(future_predictions)
 
 # Plot the predictions without using fill_between
-print("\nPlotting predictions...")
+print("\nPlotting predictions")
 plt.figure(figsize=(14, 7))
 
 # Plot historical data (last 60 days)
@@ -171,7 +171,7 @@ plt.savefig('stock_analysis/predictions/future_predictions.png', dpi=300)
 plt.close()
 
 # Generate buy/sell signals based on predictions
-print("\nGenerating buy/sell signals...")
+print("\nGenerating buy/sell signals")
 # Calculate the predicted price change
 future_predictions['Price_Change'] = future_predictions['Predicted_Close'].diff()
 future_predictions['Price_Change_Pct'] = future_predictions['Predicted_Close'].pct_change() * 100
@@ -226,7 +226,7 @@ plt.close()
 future_predictions.to_csv('stock_analysis/predictions/future_predictions.csv')
 
 # Create a summary of predictions
-print("\nCreating prediction summary...")
+print("\nCreating prediction summary")
 prediction_summary = pd.DataFrame({
     'Metric': ['Last Close Price', 'Predicted Price (Next Day)', 'Predicted Price (30 Days)', 
               'Expected Change (30 Days)', 'Expected Change % (30 Days)',
@@ -244,7 +244,7 @@ prediction_summary.to_csv('stock_analysis/predictions/prediction_summary.csv', i
 print(prediction_summary)
 
 # Create a text file with prediction insights
-print("\nCreating prediction insights document...")
+print("\nCreating prediction insights document")
 with open('stock_analysis/predictions/prediction_insights.txt', 'w') as f:
     f.write("# PNJ Stock Price Prediction Insights\n\n")
     

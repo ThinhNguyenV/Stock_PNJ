@@ -15,7 +15,7 @@ sns.set(style="darkgrid")
 os.makedirs('stock_analysis/visualizations', exist_ok=True)
 
 # Load the processed daily data
-print("Loading processed daily data...")
+print("Loading processed daily data")
 daily_df = pd.read_csv('stock_analysis/data/pnj_daily_processed.csv')
 daily_df['Date/Time'] = pd.to_datetime(daily_df['Date/Time'])
 daily_df.set_index('Date/Time', inplace=True)
@@ -34,7 +34,7 @@ def format_with_commas(x, pos):
     return '{:,.0f}'.format(x)
 
 # 1. Daily Price Chart with Moving Averages
-print("Creating daily price chart with moving averages...")
+print("Creating daily price chart with moving averages")
 plt.figure(figsize=(14, 7))
 plt.plot(daily_df.index, daily_df['Close'], label='Close Price', color='blue', alpha=0.7)
 plt.plot(daily_df.index, daily_df['20d_MA'], label='20-Day MA', color='red', alpha=0.7)
@@ -50,7 +50,7 @@ plt.savefig('stock_analysis/visualizations/daily_price_with_ma.png', dpi=300)
 plt.close()
 
 # 2. Candlestick Chart (using mplfinance)
-print("Creating candlestick chart...")
+print("Creating candlestick chart")
 # Create a subset of the data for better visualization (last 6 months)
 last_6m = daily_df.iloc[-180:].copy()
 # Prepare data for mplfinance
@@ -65,7 +65,7 @@ mpf.plot(ohlc_data, type='candle', style='yahoo',
          savefig='stock_analysis/visualizations/candlestick_chart.png')
 
 # 3. Volume Chart
-print("Creating volume chart...")
+print("Creating volume chart")
 plt.figure(figsize=(14, 7))
 plt.bar(daily_df.index, daily_df['Volume'], color='blue', alpha=0.7)
 plt.title('PNJ Daily Trading Volume (2018-2020)', fontsize=16)
@@ -78,7 +78,7 @@ plt.savefig('stock_analysis/visualizations/volume_chart.png', dpi=300)
 plt.close()
 
 # 4. Price and Volume Combined
-print("Creating price and volume combined chart...")
+print("Creating price and volume combined chart")
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10), gridspec_kw={'height_ratios': [3, 1]}, sharex=True)
 
 # Price plot
@@ -100,7 +100,7 @@ plt.savefig('stock_analysis/visualizations/price_volume_combined.png', dpi=300)
 plt.close()
 
 # 5. Daily Returns Distribution
-print("Creating daily returns distribution...")
+print("Creating daily returns distribution")
 plt.figure(figsize=(14, 7))
 sns.histplot(daily_df['Daily_Return'].dropna(), kde=True, bins=100)
 plt.title('PNJ Daily Returns Distribution (2018-2020)', fontsize=16)
@@ -113,7 +113,7 @@ plt.savefig('stock_analysis/visualizations/daily_returns_distribution.png', dpi=
 plt.close()
 
 # 6. Rolling Volatility
-print("Creating rolling volatility chart...")
+print("Creating rolling volatility chart")
 plt.figure(figsize=(14, 7))
 plt.plot(daily_df.index, daily_df['20d_Volatility'], label='20-Day Rolling Volatility (Annualized)', color='red')
 plt.title('PNJ 20-Day Rolling Volatility (2018-2020)', fontsize=16)
@@ -126,7 +126,7 @@ plt.savefig('stock_analysis/visualizations/rolling_volatility.png', dpi=300)
 plt.close()
 
 # 7. Monthly Performance Heatmap
-print("Creating monthly performance heatmap...")
+print("Creating monthly performance heatmap")
 # Create monthly returns
 monthly_returns = daily_df['Close'].resample('M').last().pct_change()
 monthly_returns = monthly_returns.to_frame()
@@ -144,7 +144,7 @@ plt.savefig('stock_analysis/visualizations/monthly_returns_heatmap.png', dpi=300
 plt.close()
 
 # 8. Yearly Performance Comparison
-print("Creating yearly performance comparison...")
+print("Creating yearly performance comparison")
 yearly_returns = daily_df['Close'].resample('Y').last().pct_change()
 plt.figure(figsize=(10, 6))
 yearly_returns.plot(kind='bar', color='blue')

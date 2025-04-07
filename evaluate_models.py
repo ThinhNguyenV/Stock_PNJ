@@ -13,12 +13,12 @@ sns.set(style="darkgrid")
 os.makedirs('stock_analysis/evaluation', exist_ok=True)
 
 # Load model performance data
-print("Loading model performance data...")
+print("Loading model performance data")
 model_performance = pd.read_csv('stock_analysis/models/model_performance.csv')
 print(model_performance)
 
 # Load the data with predictions
-print("\nLoading data with predictions...")
+print("\nLoading data with predictions")
 # We'll use the prediction files generated during model building
 models = ['Linear_Regression', 'Random_Forest', 'Gradient_Boosting', 'XGBoost', 'ARIMA']
 
@@ -28,7 +28,7 @@ df['Date/Time'] = pd.to_datetime(df['Date/Time'])
 df.set_index('Date/Time', inplace=True)
 
 # Prepare data for detailed error analysis
-print("\nPreparing data for error analysis...")
+print("\nPreparing data for error analysis")
 # We'll use the best model (Linear Regression) for detailed error analysis
 # Extract the test data and predictions from the Linear Regression model plot
 lr_pred_img = plt.imread('stock_analysis/models/Linear_Regression_Next_Day.png')
@@ -63,7 +63,7 @@ df_clean['Target_Next_Day'] = df_clean['Close'].shift(-1)
 df_clean = df_clean.dropna()
 
 # Calculate prediction errors for each model
-print("\nCalculating prediction errors...")
+print("\nCalculating prediction errors")
 
 # Create a dataframe to store error analysis
 error_analysis = pd.DataFrame()
@@ -78,7 +78,7 @@ error_analysis['LR_Abs_Error'] = abs(error_analysis['LR_Error'])
 error_analysis['LR_Pct_Error'] = (error_analysis['LR_Error'] / error_analysis['Actual']) * 100
 
 # Calculate error statistics
-print("\nCalculating error statistics...")
+print("\nCalculating error statistics")
 lr_mean_error = error_analysis['LR_Error'].mean()
 lr_median_error = error_analysis['LR_Error'].median()
 lr_std_error = error_analysis['LR_Error'].std()
@@ -92,7 +92,7 @@ print(f"Linear Regression Mean Absolute Error: {lr_mean_abs_error:.4f}")
 print(f"Linear Regression Mean Percentage Error: {lr_mean_pct_error:.4f}%")
 
 # Plot error distribution
-print("\nPlotting error distribution...")
+print("\nPlotting error distribution")
 plt.figure(figsize=(14, 7))
 sns.histplot(error_analysis['LR_Error'], kde=True, bins=20)
 plt.axvline(x=0, color='red', linestyle='--')
@@ -156,7 +156,7 @@ plt.savefig('stock_analysis/evaluation/lr_scatter_plot.png', dpi=300)
 plt.close()
 
 # Compare model performances with bar charts
-print("\nComparing model performances...")
+print("\nComparing model performances")
 # RMSE comparison
 plt.figure(figsize=(12, 8))
 sns.barplot(x=model_performance.iloc[:, 0], y='rmse', data=model_performance)
@@ -194,7 +194,7 @@ plt.savefig('stock_analysis/evaluation/model_comparison_mae.png', dpi=300)
 plt.close()
 
 # Create a summary of model evaluation
-print("\nCreating model evaluation summary...")
+print("\nCreating model evaluation summary")
 evaluation_summary = pd.DataFrame({
     'Metric': ['RMSE', 'MAE', 'R²', 'Mean Error', 'Median Error', 'Std Dev of Error', 'Mean Percentage Error'],
     'Linear Regression': [model_performance.loc[0, 'rmse'], model_performance.loc[0, 'mae'], 
@@ -215,7 +215,7 @@ evaluation_summary.to_csv('stock_analysis/evaluation/model_evaluation_summary.cs
 print(evaluation_summary)
 
 # Create a text file with evaluation insights
-print("\nCreating evaluation insights document...")
+print("\nCreating evaluation insights document")
 with open('stock_analysis/evaluation/evaluation_insights.txt', 'w') as f:
     f.write("# PNJ Stock Prediction Model Evaluation\n\n")
     

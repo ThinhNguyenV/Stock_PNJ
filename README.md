@@ -9,6 +9,7 @@ This report presents a comprehensive analysis of PNJ stock data from February 20
 ### 1.1 Dataset Overview
 
 The dataset contains minute-by-minute trading data for PNJ stock spanning from February 28, 2018, to December 22, 2020, with a total of 125,310 records. The data includes the following columns:
+
 - Ticker: Stock symbol (PNJ)
 - Date/Time: Trading timestamp
 - Open: Opening price
@@ -21,6 +22,7 @@ The dataset contains minute-by-minute trading data for PNJ stock spanning from F
 ### 1.2 Analysis Approach
 
 The analysis followed a structured approach:
+
 1. Exploratory Data Analysis: Examining data structure, checking for missing values, and calculating basic statistics
 2. Data Visualization: Creating price charts, volume analysis, and identifying trends
 3. Technical Indicator Analysis: Calculating and analyzing RSI, MACD, Bollinger Bands, and other indicators
@@ -36,6 +38,7 @@ The dataset contains 125,309 rows of minute-by-minute trading data spanning 709 
 ### 2.2 Basic Statistics
 
 Key statistics for the PNJ stock:
+
 - Average closing price: 72.18
 - Standard deviation: 9.90
 - Minimum price: 44.14
@@ -77,6 +80,7 @@ Bollinger Bands analysis showed that the stock price occasionally touched or exc
 ### 4.4 Indicator Correlation Analysis
 
 The correlation analysis between technical indicators and next-day returns showed:
+
 - MACD Histogram: 0.055 (highest positive correlation)
 - ADX: 0.024
 - Stochastic D: -0.002
@@ -94,6 +98,7 @@ These relatively weak correlations suggest that no single indicator is strongly 
 ### 5.1 Model Development
 
 Several models were developed to predict the next day's closing price:
+
 1. Linear Regression
 2. Random Forest
 3. Gradient Boosting
@@ -105,6 +110,7 @@ The models used various features including price data, volume, technical indicat
 ### 5.2 Feature Engineering
 
 The following features were engineered for the models:
+
 - Lag features for Close price, Volume, RSI, and MACD (1-5 days)
 - Rolling mean and standard deviation (5 and 10 days)
 - Technical indicators (RSI, MACD, Bollinger Bands, Stochastic Oscillator, ADX)
@@ -132,6 +138,7 @@ The feature importance analysis from the tree-based models revealed that recent 
 ### 6.1 Prediction Methodology
 
 The Linear Regression model (best performer) was used to generate predictions for the next 30 days. The predictions included:
+
 - Point forecasts for closing prices
 - 95% confidence intervals based on the model's RMSE
 - Buy/sell signals based on predicted price changes
@@ -139,6 +146,7 @@ The Linear Regression model (best performer) was used to generate predictions fo
 ### 6.2 Prediction Results
 
 Key prediction results:
+
 - Last Close Price: 76.70
 - Predicted Price (Next Day): 76.43
 - Predicted Price (30 Days): 75.60
@@ -170,6 +178,7 @@ The recommendation is based on:
 ### 7.3 Risk Assessment
 
 Key risks to consider:
+
 - The model's predictions have a margin of error (±2.51 at 95% confidence)
 - External factors not captured in the model (e.g., market news, economic events) could significantly impact the stock price
 - The stock has shown high volatility in the past (36.89% annualized)
@@ -179,6 +188,7 @@ Key risks to consider:
 ### 8.1 Limitations
 
 This analysis has several limitations:
+
 1. It relies solely on historical price and volume data, without incorporating fundamental analysis
 2. External factors such as market news, economic events, and company announcements are not considered
 3. The stock market is inherently unpredictable, and all investments carry risk
@@ -187,6 +197,7 @@ This analysis has several limitations:
 ### 8.2 Future Work
 
 Potential improvements for future analysis:
+
 1. Incorporate fundamental analysis (e.g., financial statements, valuation metrics)
 2. Include external data sources (e.g., market indices, economic indicators, news sentiment)
 3. Explore deep learning models like LSTM which may capture more complex patterns

@@ -14,11 +14,11 @@ plt.style.use('ggplot')
 sns.set(style="darkgrid")
 
 # Create output directory for predictions
-os.makedirs('stock_analysis/predictions', exist_ok=True)
+os.makedirs('/predictions', exist_ok=True)
 
 # Load the data with technical indicators
 print("Loading data with technical indicators")
-df = pd.read_csv('stock_analysis/data/pnj_daily_with_indicators.csv')
+df = pd.read_csv('data/pnj_daily_with_indicators.csv')
 df['Date/Time'] = pd.to_datetime(df['Date/Time'])
 df.set_index('Date/Time', inplace=True)
 
@@ -167,7 +167,7 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
 # Save the plot
-plt.savefig('stock_analysis/predictions/future_predictions.png', dpi=300)
+plt.savefig('/predictions/future_predictions.png', dpi=300)
 plt.close()
 
 # Generate buy/sell signals based on predictions
@@ -219,11 +219,11 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
 # Save the plot
-plt.savefig('stock_analysis/predictions/buy_sell_signals.png', dpi=300)
+plt.savefig('/predictions/buy_sell_signals.png', dpi=300)
 plt.close()
 
 # Save the predictions to CSV
-future_predictions.to_csv('stock_analysis/predictions/future_predictions.csv')
+future_predictions.to_csv('/predictions/future_predictions.csv')
 
 # Create a summary of predictions
 print("\nCreating prediction summary")
@@ -240,12 +240,12 @@ prediction_summary = pd.DataFrame({
 })
 
 # Save the summary to CSV
-prediction_summary.to_csv('stock_analysis/predictions/prediction_summary.csv', index=False)
+prediction_summary.to_csv('/predictions/prediction_summary.csv', index=False)
 print(prediction_summary)
 
 # Create a text file with prediction insights
 print("\nCreating prediction insights document")
-with open('stock_analysis/predictions/prediction_insights.txt', 'w') as f:
+with open('/predictions/prediction_insights.txt', 'w') as f:
     f.write("# PNJ Stock Price Prediction Insights\n\n")
     
     f.write("## Prediction Summary\n\n")
@@ -287,4 +287,4 @@ with open('stock_analysis/predictions/prediction_insights.txt', 'w') as f:
     f.write("4. This analysis should be used as one of many tools for making investment decisions, not as the sole basis.\n")
     f.write("5. Past performance is not indicative of future results.\n")
 
-print("\nStock prediction completed. Results saved to stock_analysis/predictions/")
+print("\nStock prediction completed. Results saved to /predictions/")

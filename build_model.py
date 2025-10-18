@@ -18,11 +18,11 @@ plt.style.use('ggplot')
 sns.set(style="darkgrid")
 
 # Create output directory for models
-os.makedirs('stock_analysis/models', exist_ok=True)
+os.makedirs('/models', exist_ok=True)
 
 # Load the data with technical indicators
-print("Loading data with technical indicators...")
-df = pd.read_csv('stock_analysis/data/pnj_daily_with_indicators.csv')
+print("Loading data with technical indicators")
+df = pd.read_csv('data/pnj_daily_with_indicators.csv')
 df['Date/Time'] = pd.to_datetime(df['Date/Time'])
 df.set_index('Date/Time', inplace=True)
 
@@ -130,7 +130,7 @@ def plot_predictions(y_true, y_pred, model_name, prediction_horizon):
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig(f'stock_analysis/models/{model_name}_{prediction_horizon}.png', dpi=300)
+    plt.savefig(f'/models/{model_name}_{prediction_horizon}.png', dpi=300)
     plt.close()
 
 # Dictionary to store model results
@@ -202,7 +202,7 @@ plt.ylabel('RMSE', fontsize=12)
 plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/models/model_comparison_rmse.png', dpi=300)
+plt.savefig('/models/model_comparison_rmse.png', dpi=300)
 plt.close()
 
 plt.figure(figsize=(12, 8))
@@ -212,7 +212,7 @@ plt.ylabel('R²', fontsize=12)
 plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/models/model_comparison_r2.png', dpi=300)
+plt.savefig('/models/model_comparison_r2.png', dpi=300)
 plt.close()
 
 # Feature importance for tree-based models
@@ -224,7 +224,7 @@ feature_importance = feature_importance.sort_values('Importance', ascending=Fals
 sns.barplot(x='Importance', y='Feature', data=feature_importance.head(20))
 plt.title('Random Forest - Top 20 Feature Importance', fontsize=16)
 plt.tight_layout()
-plt.savefig('stock_analysis/models/rf_feature_importance.png', dpi=300)
+plt.savefig('/models/rf_feature_importance.png', dpi=300)
 plt.close()
 
 # XGBoost feature importance
@@ -234,7 +234,7 @@ feature_importance = feature_importance.sort_values('Importance', ascending=Fals
 sns.barplot(x='Importance', y='Feature', data=feature_importance.head(20))
 plt.title('XGBoost - Top 20 Feature Importance', fontsize=16)
 plt.tight_layout()
-plt.savefig('stock_analysis/models/xgb_feature_importance.png', dpi=300)
+plt.savefig('/models/xgb_feature_importance.png', dpi=300)
 plt.close()
 
 # Save the best model
@@ -254,6 +254,5 @@ else:
     best_model = None
 
 # Save model results to CSV
-performance_df.to_csv('stock_analysis/models/model_performance.csv')
+performance_df.to_csv('/models/model_performance.csv')
 
-print("\nModel building and evaluation completed. Results saved to stock_analysis/models/")

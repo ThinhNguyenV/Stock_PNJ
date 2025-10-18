@@ -10,11 +10,11 @@ plt.style.use('ggplot')
 sns.set(style="darkgrid")
 
 # Create output directory for technical indicators
-os.makedirs('stock_analysis/technical_indicators', exist_ok=True)
+os.makedirs('/technical_indicators', exist_ok=True)
 
 # Load the processed daily data
 print("Loading processed daily data")
-daily_df = pd.read_csv('stock_analysis/data/pnj_daily_processed.csv')
+daily_df = pd.read_csv('data/pnj_daily_processed.csv')
 daily_df['Date/Time'] = pd.to_datetime(daily_df['Date/Time'])
 daily_df.set_index('Date/Time', inplace=True)
 
@@ -106,7 +106,7 @@ daily_df['Stoch_K'], daily_df['Stoch_D'] = calculate_stochastic(daily_df)
 daily_df['ADX'], daily_df['DI+'], daily_df['DI-'] = calculate_adx(daily_df)
 
 # Save the data with technical indicators
-daily_df.to_csv('stock_analysis/data/pnj_daily_with_indicators.csv')
+daily_df.to_csv('/data/pnj_daily_with_indicators.csv')
 
 # Plot RSI
 print("Creating RSI plot")
@@ -121,7 +121,7 @@ plt.xlabel('Date', fontsize=12)
 plt.ylabel('RSI', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/technical_indicators/rsi.png', dpi=300)
+plt.savefig('/technical_indicators/rsi.png', dpi=300)
 plt.close()
 
 # Plot MACD
@@ -136,7 +136,7 @@ plt.ylabel('MACD', fontsize=12)
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/technical_indicators/macd.png', dpi=300)
+plt.savefig('/technical_indicators/macd.png', dpi=300)
 plt.close()
 
 # Plot Bollinger Bands
@@ -153,7 +153,7 @@ plt.ylabel('Price', fontsize=12)
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/technical_indicators/bollinger_bands.png', dpi=300)
+plt.savefig('/technical_indicators/bollinger_bands.png', dpi=300)
 plt.close()
 
 # Plot Stochastic Oscillator
@@ -171,7 +171,7 @@ plt.ylabel('Value', fontsize=12)
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/technical_indicators/stochastic.png', dpi=300)
+plt.savefig('/technical_indicators/stochastic.png', dpi=300)
 plt.close()
 
 # Plot ADX
@@ -187,7 +187,7 @@ plt.ylabel('Value', fontsize=12)
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/technical_indicators/adx.png', dpi=300)
+plt.savefig('/technical_indicators/adx.png', dpi=300)
 plt.close()
 
 # Analyze correlation between indicators and price movements
@@ -208,10 +208,8 @@ plt.figure(figsize=(12, 8))
 sns.heatmap(correlation_df.corr(), annot=True, cmap='coolwarm', center=0)
 plt.title('Correlation Between Technical Indicators and Price Movements', fontsize=16)
 plt.tight_layout()
-plt.savefig('stock_analysis/technical_indicators/correlation_heatmap.png', dpi=300)
+plt.savefig('/technical_indicators/correlation_heatmap.png', dpi=300)
 plt.close()
 
 # Save correlation to file
-correlation.to_frame().to_csv('stock_analysis/technical_indicators/indicator_correlation.csv')
-
-print("Technical indicator analysis completed. Results saved to stock_analysis/technical_indicators/")
+correlation.to_frame().to_csv('/technical_indicators/indicator_correlation.csv')

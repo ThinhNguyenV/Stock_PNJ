@@ -10,11 +10,11 @@ plt.style.use('ggplot')
 sns.set(style="darkgrid")
 
 # Create output directory for evaluation
-os.makedirs('stock_analysis/evaluation', exist_ok=True)
+os.makedirs('/evaluation', exist_ok=True)
 
 # Load model performance data
 print("Loading model performance data")
-model_performance = pd.read_csv('stock_analysis/models/model_performance.csv')
+model_performance = pd.read_csv('/models/model_performance.csv')
 print(model_performance)
 
 # Load the data with predictions
@@ -23,7 +23,7 @@ print("\nLoading data with predictions")
 models = ['Linear_Regression', 'Random_Forest', 'Gradient_Boosting', 'XGBoost', 'ARIMA']
 
 # Load the original data with technical indicators
-df = pd.read_csv('stock_analysis/data/pnj_daily_with_indicators.csv')
+df = pd.read_csv('data/pnj_daily_with_indicators.csv')
 df['Date/Time'] = pd.to_datetime(df['Date/Time'])
 df.set_index('Date/Time', inplace=True)
 
@@ -31,12 +31,12 @@ df.set_index('Date/Time', inplace=True)
 print("\nPreparing data for error analysis")
 # We'll use the best model (Linear Regression) for detailed error analysis
 # Extract the test data and predictions from the Linear Regression model plot
-lr_pred_img = plt.imread('stock_analysis/models/Linear_Regression_Next_Day.png')
+lr_pred_img = plt.imread('models/Linear_Regression_Next_Day.png')
 
 # Since we can't directly extract the predictions from the image, we'll recreate a simplified version
 # of the model to get the predictions for error analysis
 # Load the processed data with features
-df_clean = pd.read_csv('stock_analysis/data/pnj_daily_with_indicators.csv')
+df_clean = pd.read_csv('data/pnj_daily_with_indicators.csv')
 df_clean['Date/Time'] = pd.to_datetime(df_clean['Date/Time'])
 df_clean.set_index('Date/Time', inplace=True)
 
@@ -101,7 +101,7 @@ plt.xlabel('Prediction Error', fontsize=12)
 plt.ylabel('Frequency', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/lr_error_distribution.png', dpi=300)
+plt.savefig('/evaluation/lr_error_distribution.png', dpi=300)
 plt.close()
 
 # Plot error over time
@@ -113,7 +113,7 @@ plt.xlabel('Date', fontsize=12)
 plt.ylabel('Prediction Error', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/lr_error_over_time.png', dpi=300)
+plt.savefig('/evaluation/lr_error_over_time.png', dpi=300)
 plt.close()
 
 # Plot actual vs predicted
@@ -126,7 +126,7 @@ plt.ylabel('Price', fontsize=12)
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/lr_actual_vs_predicted.png', dpi=300)
+plt.savefig('/evaluation/lr_actual_vs_predicted.png', dpi=300)
 plt.close()
 
 # Plot percentage error
@@ -138,7 +138,7 @@ plt.xlabel('Date', fontsize=12)
 plt.ylabel('Percentage Error (%)', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/lr_pct_error_over_time.png', dpi=300)
+plt.savefig('/evaluation/lr_pct_error_over_time.png', dpi=300)
 plt.close()
 
 # Create a scatter plot of actual vs predicted
@@ -152,7 +152,7 @@ plt.xlabel('Actual Price', fontsize=12)
 plt.ylabel('Predicted Price', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/lr_scatter_plot.png', dpi=300)
+plt.savefig('/evaluation/lr_scatter_plot.png', dpi=300)
 plt.close()
 
 # Compare model performances with bar charts
@@ -166,7 +166,7 @@ plt.ylabel('RMSE', fontsize=12)
 plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/model_comparison_rmse.png', dpi=300)
+plt.savefig('/evaluation/model_comparison_rmse.png', dpi=300)
 plt.close()
 
 # R² comparison
@@ -178,7 +178,7 @@ plt.ylabel('R²', fontsize=12)
 plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/model_comparison_r2.png', dpi=300)
+plt.savefig('/evaluation/model_comparison_r2.png', dpi=300)
 plt.close()
 
 # MAE comparison
@@ -190,7 +190,7 @@ plt.ylabel('MAE', fontsize=12)
 plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('stock_analysis/evaluation/model_comparison_mae.png', dpi=300)
+plt.savefig('/evaluation/model_comparison_mae.png', dpi=300)
 plt.close()
 
 # Create a summary of model evaluation
@@ -211,12 +211,12 @@ evaluation_summary = pd.DataFrame({
 })
 
 # Save the evaluation summary
-evaluation_summary.to_csv('stock_analysis/evaluation/model_evaluation_summary.csv', index=False)
+evaluation_summary.to_csv('/evaluation/model_evaluation_summary.csv', index=False)
 print(evaluation_summary)
 
 # Create a text file with evaluation insights
 print("\nCreating evaluation insights document")
-with open('stock_analysis/evaluation/evaluation_insights.txt', 'w') as f:
+with open('/evaluation/evaluation_insights.txt', 'w') as f:
     f.write("# PNJ Stock Prediction Model Evaluation\n\n")
     
     f.write("## Model Performance Comparison\n\n")
@@ -263,4 +263,3 @@ with open('stock_analysis/evaluation/evaluation_insights.txt', 'w') as f:
     f.write("4. Regularly retrain the model with new data to maintain prediction accuracy as market conditions change.\n")
     f.write("5. Consider incorporating external factors like market indices, economic indicators, or news sentiment for potentially improved predictions.\n")
 
-print("\nModel evaluation completed. Results saved to stock_analysis/evaluation/")

@@ -12,20 +12,20 @@ plt.style.use('ggplot')
 sns.set(style="darkgrid")
 
 # Create output directory for visualizations
-os.makedirs('stock_analysis/visualizations', exist_ok=True)
+os.makedirs('/visualizations', exist_ok=True)
 
 # Load the processed daily data
 print("Loading processed daily data")
-daily_df = pd.read_csv('stock_analysis/data/pnj_daily_processed.csv')
+daily_df = pd.read_csv('/data/pnj_daily_processed.csv')
 daily_df['Date/Time'] = pd.to_datetime(daily_df['Date/Time'])
 daily_df.set_index('Date/Time', inplace=True)
 
 # Load weekly and monthly data
-weekly_df = pd.read_csv('stock_analysis/data/pnj_weekly.csv')
+weekly_df = pd.read_csv('/data/pnj_weekly.csv')
 weekly_df['Date/Time'] = pd.to_datetime(weekly_df['Date/Time'])
 weekly_df.set_index('Date/Time', inplace=True)
 
-monthly_df = pd.read_csv('stock_analysis/data/pnj_monthly.csv')
+monthly_df = pd.read_csv('/data/pnj_monthly.csv')
 monthly_df['Date/Time'] = pd.to_datetime(monthly_df['Date/Time'])
 monthly_df.set_index('Date/Time', inplace=True)
 
@@ -46,7 +46,7 @@ plt.ylabel('Price', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.legend()
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/daily_price_with_ma.png', dpi=300)
+plt.savefig('/visualizations/daily_price_with_ma.png', dpi=300)
 plt.close()
 
 # 2. Candlestick Chart (using mplfinance)
@@ -62,7 +62,7 @@ mpf.plot(ohlc_data, type='candle', style='yahoo',
          ylabel='Price',
          volume=True,
          figsize=(14, 10),
-         savefig='stock_analysis/visualizations/candlestick_chart.png')
+         savefig='/visualizations/candlestick_chart.png')
 
 # 3. Volume Chart
 print("Creating volume chart")
@@ -74,7 +74,7 @@ plt.ylabel('Volume', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.gca().yaxis.set_major_formatter(FuncFormatter(format_with_commas))
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/volume_chart.png', dpi=300)
+plt.savefig('/visualizations/volume_chart.png', dpi=300)
 plt.close()
 
 # 4. Price and Volume Combined
@@ -96,7 +96,7 @@ ax2.grid(True, alpha=0.3)
 ax2.yaxis.set_major_formatter(FuncFormatter(format_with_commas))
 
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/price_volume_combined.png', dpi=300)
+plt.savefig('/visualizations/price_volume_combined.png', dpi=300)
 plt.close()
 
 # 5. Daily Returns Distribution
@@ -109,7 +109,7 @@ plt.ylabel('Frequency', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.axvline(x=0, color='red', linestyle='--')
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/daily_returns_distribution.png', dpi=300)
+plt.savefig('/visualizations/daily_returns_distribution.png', dpi=300)
 plt.close()
 
 # 6. Rolling Volatility
@@ -122,7 +122,7 @@ plt.ylabel('Volatility (Annualized)', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.legend()
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/rolling_volatility.png', dpi=300)
+plt.savefig('/visualizations/rolling_volatility.png', dpi=300)
 plt.close()
 
 # 7. Monthly Performance Heatmap
@@ -140,7 +140,7 @@ plt.title('PNJ Monthly Returns Heatmap (2018-2020)', fontsize=16)
 plt.xlabel('Month', fontsize=12)
 plt.ylabel('Year', fontsize=12)
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/monthly_returns_heatmap.png', dpi=300)
+plt.savefig('/visualizations/monthly_returns_heatmap.png', dpi=300)
 plt.close()
 
 # 8. Yearly Performance Comparison
@@ -154,7 +154,5 @@ plt.ylabel('Return', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.xticks(rotation=0)
 plt.tight_layout()
-plt.savefig('stock_analysis/visualizations/yearly_returns.png', dpi=300)
+plt.savefig('/visualizations/yearly_returns.png', dpi=300)
 plt.close()
-
-print("All visualizations completed and saved to stock_analysis/visualizations/")

@@ -90,10 +90,10 @@ print(f"Monthly data shape: {monthly_df.shape}")
 print(monthly_df.head())
 
 # Save resampled dataframes
-os.makedirs('stock_analysis/data', exist_ok=True)
-daily_df.to_csv('stock_analysis/data/pnj_daily.csv')
-weekly_df.to_csv('stock_analysis/data/pnj_weekly.csv')
-monthly_df.to_csv('stock_analysis/data/pnj_monthly.csv')
+os.makedirs('/data', exist_ok=True)
+daily_df.to_csv('/data/pnj_daily.csv')
+weekly_df.to_csv('/data/pnj_weekly.csv')
+monthly_df.to_csv('/data/pnj_monthly.csv')
 
 # Calculate volatility (standard deviation of returns)
 print("\n--- Volatility Analysis ---")
@@ -113,6 +113,5 @@ daily_df['20d_Volatility'] = daily_df['Daily_Return'].rolling(window=20).std() *
 print(daily_df[['Close', '20d_MA', '50d_MA', '200d_MA', '20d_Volatility']].tail())
 
 # Save the processed daily data
-daily_df.to_csv('stock_analysis/data/pnj_daily_processed.csv')
+daily_df.to_csv('/data/pnj_daily_processed.csv')
 
-print("\nExploratory data analysis completed. Results saved to stock_analysis/data/")
